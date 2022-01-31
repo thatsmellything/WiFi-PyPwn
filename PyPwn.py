@@ -21,7 +21,7 @@ def scan_wifiAccessPoints_to_file():
         
     else:
         print("Unsupported platform")
-        print(platform)
+        print(platform.system())
 #os.system("sudo airmon-ng -h > test.txt")
 
 
