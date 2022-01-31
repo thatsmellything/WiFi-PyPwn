@@ -16,7 +16,7 @@ def scan_wifiAccessPoints_to_file():
         os.system("sudo airmon-ng stop " + input_box.value + "mon")
     elif platform.system() == "win32":
         print("windows is a unsupported platform")
-    elif platform.system() == "darwin":
+    elif platform.system() == "Darwin":
         os.system("sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s > test.txt")
         
     else:
