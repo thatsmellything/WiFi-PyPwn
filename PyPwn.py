@@ -1,13 +1,27 @@
 from guizero import App, Window, PushButton, Text, TextBox, Picture, Box, Slider, CheckBox, ListBox, Combo
 import os
+import platform
+
+
+
+
 
 
 
 #TEST ME
 def scan_wifiAccessPoints_to_file():
-    os.system("sudo airmon-ng start " + input_box.value)
-    os.system("sudo airodump-ng " + input_box.value + "mon > test.txt")
-    os.system("sudo airmon-ng stop " + input_box.value + "mon")
+    if platform == "linux":
+        os.system("sudo airmon-ng start " + input_box.value)
+        os.system("sudo airodump-ng " + input_box.value + "mon > test.txt")
+        os.system("sudo airmon-ng stop " + input_box.value + "mon")
+    elif platform == "win32":
+        print("windows is a unsupported platform")
+    elif platform == "darwin":
+        os.system("/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s > test.txt")
+        os.system("airodump-ng " + input_box.value + "mon > test.txt")
+        os.system("airmon-ng stop " + input_box.value + "mon")
+    else:
+        print("Unsupported platform")
 #os.system("sudo airmon-ng -h > test.txt")
 
 
