@@ -1,6 +1,6 @@
 from guizero import App, Window, PushButton, Text, TextBox, Picture, Box, Slider, CheckBox, ListBox, Combo
 import os
-import platform
+import platform, time
 
 
 
@@ -10,14 +10,15 @@ import platform
 
 #TEST ME
 def scan_wifiAccessPoints_to_file():
-    if platform.system() == "linux":
+    if platform.system() == "Linux":
         os.system("sudo airmon-ng start " + input_box.value)
-        os.system("sudo airodump-ng " + input_box.value + "mon > test.txt")
+        os.system("sudo airodump-ng " + input_box.value + "mon > scanAPs.txt")
+        time.sleep(5)
         os.system("sudo airmon-ng stop " + input_box.value + "mon")
     elif platform.system() == "win32":
         print("windows is a unsupported platform")
     elif platform.system() == "Darwin":
-        os.system("sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s > test.txt")
+        os.system("sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s > scanAPs.txt")
         
     else:
         print("Unsupported platform")
@@ -29,8 +30,10 @@ def scan_wifiAccessPoints_to_file():
 
 #GUI Backend
 def open_APScanner_window():
-    APScanner_window.show()
     scan_wifiAccessPoints_to_file()
+    
+    APScanner_window.show()
+    
 
 def close_APScanner_window():
     APScanner_window.hide()
@@ -55,6 +58,7 @@ Scan4Devices_window.hide()
 
 #Buttons and inputs
 input_box = TextBox(PyPwn, text="Input name of scanning device")
+text = Text(APScanner_window, text=open("scanAPs.txt", "r").read())
 
 open_button = PushButton(PyPwn, text="Open AP Scanner", command=open_APScanner_window)
 close_button = PushButton(APScanner_window, text="Close", command=close_APScanner_window)

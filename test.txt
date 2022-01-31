@@ -1,2 +1,1 @@
-[0mInterface wlan0mon: 
-Failed initializing wireless card(s): wlan0mon
+[0m"airodump-ng --help" for help.
