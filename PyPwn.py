@@ -18,8 +18,7 @@ def scan_wifiAccessPoints_to_file():
         print("windows is a unsupported platform")
     elif platform == "darwin":
         os.system("/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s > test.txt")
-        os.system("airodump-ng " + input_box.value + "mon > test.txt")
-        os.system("airmon-ng stop " + input_box.value + "mon")
+        
     else:
         print("Unsupported platform")
 #os.system("sudo airmon-ng -h > test.txt")
